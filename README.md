@@ -1,121 +1,297 @@
-﻿# Crescent Construction — Production-Ready Full-Stack Website
+# Crescent Construction
 
-Production-ready web application for **Crescent Construction** (Karachi, Pakistan). Built with a modern full-stack architecture:
-- **Frontend**: React 18, TypeScript, Tailwind CSS, Vite, React Router, Lucide Icons.
-- **Backend API**: Node.js, Express, TypeScript (`server/`).
-- **Database**: Zero-dependency ACID-compliant atomic persistent store (`data/crescent_db.json`), automatically migrated and seeded with projects, services, testimonials, and administrator account.
-- **Authentication**: JWT-based role-based access control (RBAC) with password encryption (`bcryptjs`), separating public users from administrators.
-- **Direct Image Uploads**: Multi-image file uploader storing into `/uploads` (`public/uploads/`).
-- **Inquiry Delivery**: Real email dispatch using `Nodemailer` with fallback to persistent database storage.
+A modern full-stack website for **Crescent Construction**, a construction and waterproofing company based in Karachi, Pakistan.
+
+The website provides information about our construction services, projects, waterproofing solutions, and customer inquiries, along with a secure administration panel for managing website content.
+---
+## Technology Stack
+### Frontend
+- React
+- TypeScript
+- Tailwind CSS
+- Vite
+- React Router
+- Lucide React
+
+### Backend
+- Node.js
+- Express.js
+- TypeScript
+
+### Authentication & Security
+- JWT-based authentication
+- Role-based access control
+- bcryptjs password hashing
+- Protected administrator routes
+
+### Database & Storage
+- Persistent local data storage
+- Project and service management
+- Customer inquiry storage
+- Local image uploads
+
+### Email
+- Nodemailer
+- Gmail SMTP
+- Customer inquiry email notifications
 
 ---
 
 ## Business Information
 
-- **Company Name**: Crescent Construction
-- **Phone / WhatsApp**: 03272834501
-- **Official Email**: crescentconstructionofficial@gmail.com
-- **Office**: Gulshan-e-Iqbal Block 13 D3, Panama Centre, Office No. M-07, Karachi, Pakistan
-- **Facebook**: https://web.facebook.com/crescent.construction/
-- **Instagram**: https://www.instagram.com/crescentconstruction11?stkn=b2RqM3d3MmtsYzZw
+**Company:** Crescent Construction
+
+**Phone / WhatsApp:** 03272834501
+
+**Email:** crescentconstructionofficial@gmail.com
+
+**Office:** Gulshan-e-Iqbal Block 13 D3, Panama Centre, Office No. M-07, Karachi, Pakistan
+
+**Facebook:**  
+https://web.facebook.com/crescent.construction/
+
+**Instagram:**  
+https://www.instagram.com/crescentconstruction11/
 
 ---
 
-## Quick Start (Local Development)
+## Main Services
 
-1. **Clone or open project folder**:
-   ```bash
-   cd crescent-construction-website
-   ```
-
-2. **Install dependencies**:
-   ```bash
-   npm install
-   ```
-
-3. **Configure Environment Variables**:
-   Copy `.env.example` to `.env` (already done by default):
-   ```bash
-   cp .env.example .env
-   ```
-
-4. **Start Development Servers** (Runs Express API on port 5000 & Vite Client on port 5173 with auto-proxy):
-   ```bash
-   npm run dev
-   ```
-   Open `http://localhost:5173` in your browser.
+- Rooftop Waterproofing
+- Basement Waterproofing
+- Terrace Waterproofing
+- Water Tank Waterproofing
+- Foundation Waterproofing
+- Concrete Waterproofing
+- Structural Waterproofing
+- Under-Construction Waterproofing
+- Grey Structure Construction
+- Complete Construction & Finishing
 
 ---
 
-## Initial Administrator Account
+## Website Features
 
-On first launch, the database automatically seeds the primary administrator account:
+### Public Website
 
-- **Email**: `crescentconstructionofficial@gmail.com`
-- **Default Password**: `CrescentAdmin2026!` (configured in `.env`)
-- **Admin Panel URL**: `/admin` or via the "Admin Panel" button after logging in at `/login`.
+- Company information
+- Construction services
+- Waterproofing services
+- Project portfolio
+- Project details
+- Contact and inquiry forms
+- WhatsApp contact options
+- Email inquiry submission
+- Responsive design for desktop and mobile
 
-> **Security Note**: You can change this password at any time inside the Admin Panel under **Settings** (`/admin/settings`).
+### Admin Panel
+
+The website includes a protected administrator panel for managing website content and customer inquiries.
+
+Features include:
+
+- Dashboard
+- Project management
+- Add, edit and delete projects
+- Multiple project image uploads
+- Featured project management
+- Customer inquiry management
+- Read/unread inquiry status
+- Customer contact information
+- WhatsApp reply option
+- Email reply option
+- Services management
+- Testimonials management
+- User account management
+- Administrator role management
+- Login activity and security logs
+- Admin password management
 
 ---
 
-## Production Deployment
+## Project Structure
 
-### Option 1: VPS / Dedicated Server / Node.js Host (Render, Railway, DigitalOcean, Ubuntu VPS)
+```text
+crescent-construction-website/
+│
+├── public/
+│   └── uploads/
+│
+├── src/
+│   ├── components/
+│   ├── pages/
+│   ├── assets/
+│   └── ...
+│
+├── server/
+│   ├── routes/
+│   ├── middleware/
+│   └── ...
+│
+├── data/
+│
+├── .env.example
+├── .gitignore
+├── index.html
+├── package.json
+├── package-lock.json
+├── vite.config.ts
+├── tailwind.config.js
+├── tsconfig.json
+└── README.md
+Local Development
+1. Install Dependencies
+npm install
+2. Configure Environment Variables
 
-1. Set environment variables on your host:
-   ```env
-   PORT=5000
-   NODE_ENV=production
-   JWT_SECRET=your-secure-random-jwt-secret-string
-   ADMIN_EMAIL=crescentconstructionofficial@gmail.com
-   ADMIN_DEFAULT_PASSWORD=YourStrongAdminPassword123!
-   SMTP_HOST=smtp.gmail.com
-   SMTP_PORT=587
-   SMTP_USER=crescentconstructionofficial@gmail.com
-   SMTP_PASS=your-gmail-app-password
-   CONTACT_RECEIVER_EMAIL=crescentconstructionofficial@gmail.com
-   ```
+Create a local .env file using .env.example as a reference.
 
-2. Build and start:
-   ```bash
-   npm install
-   npm run build
-   npm start
-   ```
-   The production Express server automatically serves both the API routes (`/api/*`), image uploads (`/uploads/*`), and the compiled Vite frontend (`dist/`) on port 5000 with SPA catch-all routing!
+cp .env.example .env
 
-### Option 2: PM2 Process Manager (for VPS)
+Then configure the required environment variables in your local .env file.
 
-```bash
+3. Start the Development Server
+npm run dev
+
+The application runs the frontend and backend development servers with the configured development setup.
+
+Environment Variables
+
+The application uses environment variables for sensitive configuration.
+
+Example:
+
+PORT=5000
+NODE_ENV=development
+
+JWT_SECRET=your-secure-jwt-secret
+
+ADMIN_EMAIL=your-admin-email
+ADMIN_DEFAULT_PASSWORD=your-secure-admin-password
+
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=your-email
+SMTP_PASS=your-gmail-app-password
+
+CONTACT_RECEIVER_EMAIL=your-email
+Security
+
+The actual values must never be published in this repository.
+
+Keep sensitive credentials inside:
+
+.env
+
+or configure them through the environment-variable settings provided by your hosting platform.
+
+Administrator Access
+
+The website contains a protected administrator panel.
+
+Admin panel:
+
+/admin
+
+Administrator credentials are intentionally not included in this repository.
+
+The administrator email and password are configured through environment variables.
+
+Email Configuration
+
+Customer inquiries can be delivered through Gmail SMTP using Nodemailer.
+
+To configure email delivery:
+
+Enable 2-Step Verification on the Gmail account.
+Create a Gmail App Password.
+Configure the SMTP environment variables.
+Add the App Password to the local .env file.
+Restart the application.
+
+Example:
+
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=your-email@gmail.com
+SMTP_PASS=your-app-password
+CONTACT_RECEIVER_EMAIL=your-email@gmail.com
+
+Never publish the actual Gmail App Password.
+
+Production Deployment
+
+Before deploying to production, configure the required environment variables on the hosting server.
+
+Example:
+
+NODE_ENV=production
+PORT=5000
+JWT_SECRET=your-production-secret
+
+ADMIN_EMAIL=your-admin-email
+ADMIN_DEFAULT_PASSWORD=your-production-admin-password
+
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=your-email
+SMTP_PASS=your-gmail-app-password
+
+CONTACT_RECEIVER_EMAIL=your-email
+
+Install dependencies:
+
+npm install
+
+Build the application:
+
 npm run build
-pm2 start "npm start" --name "crescent-website"
-pm2 save
-```
 
----
+Start the production server:
 
-## Admin Panel Features
+npm start
+Security Guidelines
 
-- **Dashboard (`/admin`)**: Key statistics (Total Projects, Inquiries, Unread inquiries, Registered Users, Login Activity), recent leads, and quick actions.
-- **Projects (`/admin/projects`)**: Add, edit, delete projects; direct drag-and-drop / multiple image upload; toggle featured status; manage descriptions and completion years.
-- **Inquiries (`/admin/inquiries`)**: View all customer quote requests; filter by Read/Unread; view full customer message, budget, and location; direct one-click "Reply on WhatsApp" and "Reply via Email" buttons; toggle status and delete records.
-- **Services (`/admin/services`)**: Edit service titles, descriptions, icons, and CTA text.
-- **Testimonials (`/admin/testimonials`)**: Manage client feedback, ratings, and sample reviews.
-- **User Accounts (`/admin/users`)**: View registered accounts, toggle active/inactive status, grant/revoke administrator privileges.
-- **Login Activity (`/admin/activity`)**: Security audit trail of user and admin logins with timestamps, success/failure status, and IP addresses.
-- **Settings (`/admin/settings`)**: Secure admin password reset form.
+The following information must never be committed to GitHub:
 
----
+Administrator passwords
+Gmail App Passwords
+JWT secrets
+API keys
+Private authentication credentials
+Production secrets
+Other sensitive environment variables
 
-## Email Configuration (Gmail SMTP)
+The .env file should remain local and should be excluded through .gitignore.
 
-To enable live email delivery to `crescentconstructionofficial@gmail.com`:
-1. Log in to the Google Account `crescentconstructionofficial@gmail.com`.
-2. Enable 2-Step Verification in Google Account Security.
-3. Generate an **App Password**: [https://myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords). Select "Mail" and generate a 16-character code.
-4. Paste the 16-character code into `.env`:
-   ```env
-   SMTP_PASS=xxxx xxxx xxxx xxxx
-   ```
-5. Restart the server. Now, whenever any visitor submits the contact form, an email will arrive in your Gmail inbox!
+The repository may contain:
+
+.env.example
+
+but it must contain placeholder values only, never real credentials.
+
+Client Feedback
+
+We believe our work speaks for itself.
+
+Clients can request visits to selected completed or ongoing project sites to see our workmanship firsthand.
+
+Client references and feedback may also be shared upon request, subject to client permission.
+
+Contact
+
+For construction, waterproofing, or project inquiries:
+
+Crescent Construction
+
+Phone / WhatsApp: 03272834501
+
+Email: crescentconstructionofficial@gmail.com
+
+Office: Gulshan-e-Iqbal Block 13 D3, Panama Centre, Office No. M-07, Karachi, Pakistan
+
+License
+
+This project is developed for Crescent Construction.
+
+All rights reserved.
