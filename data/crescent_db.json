@@ -1,0 +1,595 @@
+{
+  "users": [
+    {
+      "id": "user-admin-1",
+      "name": "Crescent Administrator",
+      "email": "crescentconstructionofficial@gmail.com",
+      "password_hash": "$2a$10$1X5bXUgqgRA4Y4JRdyEvxOUMpR0h2WO.mHbSCqk.HvH6u2hB4Ajga",
+      "role": "admin",
+      "status": "active",
+      "created_at": "2026-09-08T10:12:24.769Z",
+      "last_login_at": "2026-09-09T10:11:51.768Z"
+    },
+    {
+      "name": "Regular Test User",
+      "email": "testuser_1788863217671@example.com",
+      "password_hash": "$2a$10$Q21w72CkK4WcCXPcJreGSuBgY8qMD3k/kt.SliPFxC/y98CH6bi5u",
+      "role": "user",
+      "status": "active",
+      "id": "user-1788863217796-t4ate",
+      "created_at": "2026-09-08T10:26:57.796Z",
+      "last_login_at": null
+    },
+    {
+      "name": "Adil",
+      "email": "adilkamranadilkamran056@gmail.com",
+      "password_hash": "$2a$10$STqNFWgaJLFANi7YzpDOcOCFPdevb4hayHegMrbXm0563l9TDpRNG",
+      "role": "user",
+      "status": "active",
+      "id": "user-1788865017963-q2yrw",
+      "created_at": "2026-09-08T10:56:57.963Z",
+      "last_login_at": "2026-09-09T10:18:59.517Z"
+    }
+  ],
+  "projects": [
+    {
+      "title": "Modern House Grey Structure",
+      "slug": "modern-house-grey-structure-3amh",
+      "category": "Residential",
+      "location": "Saadi Town Scheme 33",
+      "status": "In Progress",
+      "short_desc": "Work start in oct 2025 from turnkey and it's about to finish in month",
+      "full_desc": "Amreli Steel , Falcon cement or high quality blocks",
+      "images": [
+        "/uploads/img-15-1788948936898-0cauk.jpg"
+      ],
+      "featured": false,
+      "completion_year": "2026",
+      "id": "proj-1788949045853",
+      "created_at": "2026-09-09T10:17:25.853Z",
+      "updated_at": "2026-09-09T10:17:25.853Z"
+    },
+    {
+      "id": "proj-1",
+      "title": "Luxury Villa Grey Structure",
+      "slug": "luxury-villa-grey-structure",
+      "category": "Grey Structure",
+      "location": "DHA Phase 8, Karachi",
+      "status": "Completed",
+      "short_desc": "Reinforced concrete framing, engineered columns, foundation footings and beam layout to seismic standards.",
+      "full_desc": "Comprehensive grey structure execution for a high-end multi-storey private villa located in DHA Phase 8. Engineered under rigorous quality control standards using high-grade deformed steel and certified ready-mix concrete. Includes basement retaining walls, raft foundation, shear walls, and structural columns with precision alignment.",
+      "images": [
+        "/uploads/project-2.jpg",
+        "/uploads/project-3.jpg",
+        "/uploads/project-4.jpg"
+      ],
+      "featured": true,
+      "completion_year": "2024",
+      "created_at": "2026-09-08T10:12:24.657Z",
+      "updated_at": "2026-09-08T10:12:24.657Z"
+    },
+    {
+      "id": "proj-2",
+      "title": "Commercial Plaza Structural Framing",
+      "slug": "commercial-plaza-structural-framing",
+      "category": "Grey Structure",
+      "location": "Bahria Town, Karachi",
+      "status": "In Progress",
+      "short_desc": "Heavy-duty commercial framing with wide-span concrete slabs and elevated parking structure.",
+      "full_desc": "Multi-level commercial structure designed for commercial retail on ground floors and corporate executive suites on upper levels. Our team is executing structural concrete works, MEP conduits cast-in-slab, and specialized concrete vibratory curing to guarantee zero honeycombing and maximum load capacity.",
+      "images": [
+        "/uploads/project-3.jpg",
+        "/uploads/project-4.jpg",
+        "/uploads/project-12.jpg"
+      ],
+      "featured": true,
+      "completion_year": "2025",
+      "created_at": "2026-09-08T10:12:24.657Z",
+      "updated_at": "2026-09-08T10:12:24.657Z"
+    },
+    {
+      "id": "proj-3",
+      "title": "Engineered Foundation & Piling",
+      "slug": "engineered-foundation-piling",
+      "category": "Grey Structure",
+      "location": "Clifton Block 4, Karachi",
+      "status": "Completed",
+      "short_desc": "Sub-surface soil treatment, deep reinforced footings, and moisture barrier integration.",
+      "full_desc": "Specialized foundation excavation and raft foundation engineering in coastal soil conditions. Engineered with sulfate-resistant cement, double-layer waterproofing membrane, and continuous structural soil compaction to ensure long-term stability against coastal groundwater pressure.",
+      "images": [
+        "/uploads/project-4.jpg",
+        "/uploads/project-2.jpg",
+        "/uploads/project-8.jpg"
+      ],
+      "featured": false,
+      "completion_year": "2023",
+      "created_at": "2026-09-08T10:12:24.657Z",
+      "updated_at": "2026-09-08T10:12:24.657Z"
+    },
+    {
+      "id": "proj-4",
+      "title": "Contemporary Residence Construction",
+      "slug": "contemporary-residence-construction",
+      "category": "Residential",
+      "location": "Gulshan-e-Iqbal Block 13-D, Karachi",
+      "status": "Completed",
+      "short_desc": "Turnkey residential home build spanning 500 sq yds with contemporary aesthetic design and high-end finishes.",
+      "full_desc": "Turnkey construction of an elegant modern residence in Gulshan-e-Iqbal. Delivered from bare ground to complete turnkey handover including grey structure, exterior rendering, thermal insulation, luxury porcelain tile installations, custom hardwood doors, and concealed plumbing/electrical works.",
+      "images": [
+        "/uploads/project-5.jpg",
+        "/uploads/project-8.jpg",
+        "/uploads/project-11.jpg",
+        "/uploads/project-15.jpg"
+      ],
+      "featured": true,
+      "completion_year": "2024",
+      "created_at": "2026-09-08T10:12:24.657Z",
+      "updated_at": "2026-09-08T10:12:24.657Z"
+    },
+    {
+      "id": "proj-5",
+      "title": "Commercial Executive Complex Finishing",
+      "slug": "commercial-executive-complex-finishing",
+      "category": "Commercial",
+      "location": "PECHS Block 6, Karachi",
+      "status": "Completed",
+      "short_desc": "Comprehensive architectural finishing, modern facade work, and executive interior fit-outs.",
+      "full_desc": "High-end interior and exterior finishing for a multi-tenant corporate office building in PECHS. Project included structural glazing support framing, Italian porcelain lobbies, acoustic ceiling panels, and precision drywall partitions.",
+      "images": [
+        "/uploads/project-6.jpg",
+        "/uploads/project-9.jpg",
+        "/uploads/project-13.jpg"
+      ],
+      "featured": true,
+      "completion_year": "2024",
+      "created_at": "2026-09-08T10:12:24.657Z",
+      "updated_at": "2026-09-08T10:12:24.657Z"
+    },
+    {
+      "id": "proj-6",
+      "title": "Architectural Staircase & Interior Renovation",
+      "slug": "architectural-staircase-renovation",
+      "category": "Renovation",
+      "location": "KDA Scheme 1, Karachi",
+      "status": "Completed",
+      "short_desc": "Structural alteration of load-bearing staircase, bespoke wooden steps, and glass balustrades.",
+      "full_desc": "Structural remodeling and architectural staircase reconstruction inside an existing luxury estate. The project involved reinforcement of slab openings with structural steel beams, cantilevered concrete steps, and seamless tempered glass railing installations.",
+      "images": [
+        "/uploads/project-7.jpg",
+        "/uploads/project-10.jpg"
+      ],
+      "featured": false,
+      "completion_year": "2024",
+      "created_at": "2026-09-08T10:12:24.657Z",
+      "updated_at": "2026-09-08T10:12:24.657Z"
+    },
+    {
+      "id": "proj-7",
+      "title": "Modern Single-Family Estate",
+      "slug": "modern-single-family-estate",
+      "category": "Residential",
+      "location": "DHA Phase 6, Karachi",
+      "status": "Completed",
+      "short_desc": "Turnkey luxury villa construction featuring cantilevered terraces and high ceilings.",
+      "full_desc": "Architecturally designed 1000 sq yd home featuring open-plan living zones, thermally broken aluminium windows, rooftop entertainment area, and sustainable greywater plumbing.",
+      "images": [
+        "/uploads/project-8.jpg",
+        "/uploads/project-5.jpg",
+        "/uploads/project-15.jpg"
+      ],
+      "featured": true,
+      "completion_year": "2025",
+      "created_at": "2026-09-08T10:12:24.657Z",
+      "updated_at": "2026-09-08T10:12:24.657Z"
+    },
+    {
+      "id": "proj-8",
+      "title": "Retail Storefront & Showroom Fit-Out",
+      "slug": "retail-storefront-showroom-fit-out",
+      "category": "Commercial",
+      "location": "Tariq Road Commercial Area, Karachi",
+      "status": "Completed",
+      "short_desc": "Turnkey retail space renovation, structural storefront expansion, and commercial floor leveling.",
+      "full_desc": "Complete commercial fit-out for a flagship fashion showroom. Works entailed structural beam insertion to open up retail frontage, heavy-duty epoxy terrazzo flooring, custom architectural lighting conduits, and centralized air conditioning ductwork.",
+      "images": [
+        "/uploads/project-9.jpg",
+        "/uploads/project-6.jpg",
+        "/uploads/project-14.jpg"
+      ],
+      "featured": false,
+      "completion_year": "2024",
+      "created_at": "2026-09-08T10:12:24.657Z",
+      "updated_at": "2026-09-08T10:12:24.657Z"
+    },
+    {
+      "id": "proj-9",
+      "title": "Bespoke Gourmet Kitchen Remodel",
+      "slug": "bespoke-gourmet-kitchen-remodel",
+      "category": "Renovation",
+      "location": "Clifton Block 2, Karachi",
+      "status": "Completed",
+      "short_desc": "Structural masonry adjustments, concealed utility upgrades, and designer finish.",
+      "full_desc": "Complete modernization of a spacious residential kitchen. We relocated plumbing and electrical mains, installed water-resistant backing boards, custom quartz countertops, and concealed ventilation exhausts.",
+      "images": [
+        "/uploads/project-10.jpg",
+        "/uploads/project-7.jpg"
+      ],
+      "featured": false,
+      "completion_year": "2024",
+      "created_at": "2026-09-08T10:12:24.657Z",
+      "updated_at": "2026-09-08T10:12:24.657Z"
+    },
+    {
+      "id": "proj-10",
+      "title": "Multi-Unit Residential Development",
+      "slug": "multi-unit-residential-development",
+      "category": "Residential",
+      "location": "Gulistan-e-Jauhar, Karachi",
+      "status": "In Progress",
+      "short_desc": "Multi-family residential complex with basement parking and premium apartments.",
+      "full_desc": "Five-storey residential structure incorporating earthquake-resistant framing, underground water reservoir with membrane waterproofing, and overhead water tank casting.",
+      "images": [
+        "/uploads/project-11.jpg",
+        "/uploads/project-1.jpg",
+        "/uploads/project-15.jpg"
+      ],
+      "featured": false,
+      "completion_year": "2025",
+      "created_at": "2026-09-08T10:12:24.657Z",
+      "updated_at": "2026-09-08T10:12:24.657Z"
+    },
+    {
+      "id": "proj-11",
+      "title": "Corporate Headquarters Facility",
+      "slug": "corporate-headquarters-facility",
+      "category": "Commercial",
+      "location": "I.I. Chundrigar Road, Karachi",
+      "status": "Completed",
+      "short_desc": "Structural upgrading, floor rehabilitation, and modernization of financial institution offices.",
+      "full_desc": "Structural retrofitting of an existing corporate office facility to enhance safety and modernize spatial flow. Work included carbon-fiber reinforced polymer (CFRP) beam strengthening, high-traffic fire-rated doors, and floor screeding.",
+      "images": [
+        "/uploads/project-12.jpg",
+        "/uploads/project-13.jpg",
+        "/uploads/project-14.jpg"
+      ],
+      "featured": true,
+      "completion_year": "2023",
+      "created_at": "2026-09-08T10:12:24.657Z",
+      "updated_at": "2026-09-08T10:12:24.657Z"
+    },
+    {
+      "id": "proj-12",
+      "title": "Commercial Distribution Centre",
+      "slug": "commercial-distribution-centre",
+      "category": "Commercial",
+      "location": "SITE Industrial Area, Karachi",
+      "status": "Completed",
+      "short_desc": "Heavy-duty industrial concrete slab casting with hardener topping and high-load civil boundary works.",
+      "full_desc": "Industrial distribution facility construction covering 25,000 sq ft. Features laser-screeded concrete floors with metallic dry-shake hardeners for forklift traffic, reinforced loading bays, and deep drainage culverts.",
+      "images": [
+        "/uploads/project-13.jpg",
+        "/uploads/project-14.jpg"
+      ],
+      "featured": false,
+      "completion_year": "2023",
+      "created_at": "2026-09-08T10:12:24.657Z",
+      "updated_at": "2026-09-08T10:12:24.657Z"
+    },
+    {
+      "id": "proj-13",
+      "title": "Modern Office Tower Level Fit-Out",
+      "slug": "modern-office-tower-level-fit-out",
+      "category": "Commercial",
+      "location": "Clifton Harbour Front, Karachi",
+      "status": "Completed",
+      "short_desc": "Full floor commercial execution with modern glass partitions and acoustic ceilings.",
+      "full_desc": "Executive commercial interior construction completed on tight schedules. Included precision raised access flooring, server room fire-suppression structural barriers, and contemporary conference facilities.",
+      "images": [
+        "/uploads/project-14.jpg",
+        "/uploads/project-9.jpg",
+        "/uploads/project-6.jpg"
+      ],
+      "featured": false,
+      "completion_year": "2024",
+      "created_at": "2026-09-08T10:12:24.657Z",
+      "updated_at": "2026-09-08T10:12:24.657Z"
+    },
+    {
+      "id": "proj-14",
+      "title": "Private Custom Residence",
+      "slug": "private-custom-residence",
+      "category": "Residential",
+      "location": "Navy Housing Scheme, Karachi",
+      "status": "Completed",
+      "short_desc": "Bespoke two-storey family residence built with top-tier brick masonry and custom finishes.",
+      "full_desc": "Custom residential villa constructed with high attention to structural longevity and thermal comfort. Includes hollow-block exterior envelope for insulation, waterproofing across all wet zones, and premium woodwork.",
+      "images": [
+        "/uploads/project-15.jpg",
+        "/uploads/project-5.jpg",
+        "/uploads/project-8.jpg"
+      ],
+      "featured": false,
+      "completion_year": "2024",
+      "created_at": "2026-09-08T10:12:24.657Z",
+      "updated_at": "2026-09-08T10:12:24.657Z"
+    },
+    {
+      "id": "proj-15",
+      "title": "High-Performance Roof & Terrace Waterproofing",
+      "slug": "high-performance-waterproofing",
+      "category": "Residential",
+      "location": "DHA Phase 5, Karachi",
+      "status": "Completed",
+      "short_desc": "Multi-layer elastomeric polymer and bitumen membrane waterproofing for 600 sq yd terrace.",
+      "full_desc": "Specialized chemical waterproofing application targeting heavy monsoon leakage and thermal expansion. Surface preparation included crack stitching, polymer-modified cementitious basecoat, heavy-gauge APP bituminous membrane torching, and protective screed laying with slope correction.",
+      "images": [
+        "/uploads/project-17.jpg",
+        "/uploads/project-1.jpg"
+      ],
+      "featured": true,
+      "completion_year": "2025",
+      "created_at": "2026-09-08T10:12:24.657Z",
+      "updated_at": "2026-09-09T10:18:07.754Z"
+    }
+  ],
+  "inquiries": [
+    {
+      "name": "Adil kamran",
+      "phone": "03122242061",
+      "email": "adilkamranadilkamran056@gmail.com",
+      "project_type": "Complete House Construction",
+      "location": "Gulshan e iqbal",
+      "budget": "200Sqyd / 45 lac",
+      "message": "Call me",
+      "id": "inq-1788948560147-6keo",
+      "is_read": true,
+      "created_at": "2026-09-09T10:09:20.147Z"
+    },
+    {
+      "name": "Tariq Mehmood (Live Contact Form Verification)",
+      "phone": "03272834501",
+      "email": "crescentconstructionofficial@gmail.com",
+      "project_type": "Complete House Construction",
+      "location": "Gulshan-e-Iqbal Block 13 D3, Panama Centre, Karachi",
+      "budget": "PKR 50 lac",
+      "message": "We require complete house construction from foundation to finishing for a 240 sq yd plot.",
+      "id": "inq-1788948162319-leip",
+      "is_read": false,
+      "created_at": "2026-09-09T10:02:42.324Z"
+    },
+    {
+      "name": "Adil kamran",
+      "phone": "03122242061",
+      "email": "adilkamranadilkamran056@gmail.com",
+      "project_type": "Grey Structure",
+      "location": "Gulshan e iqbal",
+      "budget": "200Sqyd / 45 lac",
+      "message": "call me",
+      "id": "inq-1788871211112-t68p",
+      "is_read": false,
+      "created_at": "2026-09-08T12:40:11.112Z"
+    },
+    {
+      "name": "Adil kamran",
+      "phone": "03122242061",
+      "email": "adilkamranadilkamran056@gmail.com",
+      "project_type": "Grey Structure",
+      "location": "Gulshan e iqbal",
+      "budget": "200Sqyd / 45 lac",
+      "message": "call me then we discuss",
+      "id": "inq-1788870904982-11qw",
+      "is_read": false,
+      "created_at": "2026-09-08T12:35:04.982Z"
+    },
+    {
+      "name": "Adil",
+      "phone": "03122242061",
+      "email": "adilkamranadilkamran056@gmail.com",
+      "project_type": "Grey Structure",
+      "location": "Gulshan e iqbal",
+      "budget": "200Sqyd / 45 lac",
+      "message": "call me then we discuss all things",
+      "id": "inq-1788870851354-qmdw",
+      "is_read": false,
+      "created_at": "2026-09-08T12:34:11.354Z"
+    }
+  ],
+  "services": [
+    {
+      "id": "srv-1",
+      "number": "01",
+      "title": "Grey Structure",
+      "desc": "Column, beam, slab and structural framing carried out to engineering specification.",
+      "icon_name": "Building2",
+      "sort_order": 1
+    },
+    {
+      "id": "srv-2",
+      "number": "02",
+      "title": "Complete House Construction",
+      "desc": "End-to-end residential builds — from foundation to final handover.",
+      "icon_name": "Home",
+      "sort_order": 2
+    },
+    {
+      "id": "srv-3",
+      "number": "03",
+      "title": "Civil Works",
+      "desc": "Site development, boundary walls, drainage and general civil engineering works.",
+      "icon_name": "Trowel",
+      "sort_order": 3
+    },
+    {
+      "id": "srv-4",
+      "number": "04",
+      "title": "Structural & Concrete Work",
+      "desc": "Reinforced concrete work engineered for load-bearing accuracy and durability.",
+      "icon_name": "Boxes",
+      "sort_order": 4
+    },
+    {
+      "id": "srv-5",
+      "number": "05",
+      "title": "Waterproofing",
+      "desc": "Roof, terrace, basement and water-tank waterproofing against seepage and damage.",
+      "icon_name": "Droplets",
+      "sort_order": 5
+    },
+    {
+      "id": "srv-6",
+      "number": "06",
+      "title": "Foundation Work",
+      "desc": "Footings and foundation systems engineered for site-specific soil conditions.",
+      "icon_name": "Layers",
+      "sort_order": 6
+    },
+    {
+      "id": "srv-7",
+      "number": "07",
+      "title": "Renovation",
+      "desc": "Structural and cosmetic renovation for existing residential and commercial spaces.",
+      "icon_name": "Hammer",
+      "sort_order": 7
+    },
+    {
+      "id": "srv-8",
+      "number": "08",
+      "title": "Finishing Works",
+      "desc": "Flooring, plaster, paint and interior finishing carried through to final detail.",
+      "icon_name": "Paintbrush",
+      "sort_order": 8
+    },
+    {
+      "id": "srv-9",
+      "number": "09",
+      "title": "Structural Drawing Review",
+      "desc": "Reviewing drawings before construction begins to check coordination and clarify structural requirements.",
+      "icon_name": "FileCheck",
+      "cta": "Discuss Your Project",
+      "sort_order": 9
+    }
+  ],
+  "testimonials": [
+    {
+      "id": "test-1",
+      "label": "Residential Villa Owner",
+      "type": "Residential Construction Client",
+      "location": "DHA Phase 8, Karachi",
+      "quote": "Crescent Construction handled our house grey structure with absolute professionalism. The structural engineer visited regularly, concrete testing was documented, and milestones were finished on schedule.",
+      "is_sample": false,
+      "rating": 5,
+      "created_at": "2026-09-08T10:12:24.658Z"
+    },
+    {
+      "id": "test-2",
+      "label": "Commercial Developer",
+      "type": "Commercial Construction Client",
+      "location": "Gulshan-e-Iqbal, Karachi",
+      "quote": "Exceptional transparency regarding material procurement and engineering adherence. Finding honest contractors in Karachi is challenging; Crescent Construction earned our full trust.",
+      "is_sample": false,
+      "rating": 5,
+      "created_at": "2026-09-08T10:12:24.658Z"
+    },
+    {
+      "id": "test-3",
+      "label": "Homeowner",
+      "type": "Waterproofing & Renovation Client",
+      "location": "Clifton, Karachi",
+      "quote": "We had persistent terrace seepage during monsoons for years. Crescent Construction diagnosed the root cause, applied multi-layer membrane waterproofing, and solved the problem permanently.",
+      "is_sample": false,
+      "rating": 5,
+      "created_at": "2026-09-08T10:12:24.658Z"
+    }
+  ],
+  "login_activity": [
+    {
+      "user_id": "user-1788865017963-q2yrw",
+      "email": "adilkamranadilkamran056@gmail.com",
+      "status": "success",
+      "ip_address": "::1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+      "id": "act-1788949139520-5wi4",
+      "created_at": "2026-09-09T10:18:59.520Z"
+    },
+    {
+      "user_id": "user-admin-1",
+      "email": "crescentconstructionofficial@gmail.com",
+      "status": "success",
+      "ip_address": "::1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+      "id": "act-1788948711771-tqdr",
+      "created_at": "2026-09-09T10:11:51.772Z"
+    },
+    {
+      "user_id": "user-1788865017963-q2yrw",
+      "email": "adilkamranadilkamran056@gmail.com",
+      "status": "success",
+      "ip_address": "::1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+      "id": "act-1788948532609-x6rj",
+      "created_at": "2026-09-09T10:08:52.609Z"
+    },
+    {
+      "user_id": "user-1788865017963-q2yrw",
+      "email": "adilkamranadilkamran056@gmail.com",
+      "status": "failed",
+      "ip_address": "::1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+      "id": "act-1788948526038-2pgi",
+      "created_at": "2026-09-09T10:08:46.038Z"
+    },
+    {
+      "user_id": "user-1788865017963-q2yrw",
+      "email": "adilkamranadilkamran056@gmail.com",
+      "status": "success",
+      "ip_address": "::1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+      "id": "act-1788870779791-mr8y",
+      "created_at": "2026-09-08T12:32:59.791Z"
+    },
+    {
+      "user_id": "user-admin-1",
+      "email": "crescentconstructionofficial@gmail.com",
+      "status": "success",
+      "ip_address": "::1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+      "id": "act-1788865235185-l5xw",
+      "created_at": "2026-09-08T11:00:35.185Z"
+    },
+    {
+      "user_id": "user-1788865017963-q2yrw",
+      "email": "adilkamranadilkamran056@gmail.com",
+      "status": "success",
+      "ip_address": "::1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+      "id": "act-1788865017977-lv2q",
+      "created_at": "2026-09-08T10:56:57.978Z"
+    },
+    {
+      "email": "adilkamranadilkamran056@gmail.com",
+      "status": "failed",
+      "ip_address": "::1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+      "id": "act-1788864996614-v25p",
+      "created_at": "2026-09-08T10:56:36.614Z"
+    },
+    {
+      "user_id": "user-1788863217796-t4ate",
+      "email": "testuser_1788863217671@example.com",
+      "status": "success",
+      "ip_address": "::1",
+      "user_agent": "node",
+      "id": "act-1788863217798-1emt",
+      "created_at": "2026-09-08T10:26:57.798Z"
+    },
+    {
+      "user_id": "user-admin-1",
+      "email": "crescentconstructionofficial@gmail.com",
+      "status": "success",
+      "ip_address": "::1",
+      "user_agent": "node",
+      "id": "act-1788863217541-j26b",
+      "created_at": "2026-09-08T10:26:57.541Z"
+    }
+  ]
+}
