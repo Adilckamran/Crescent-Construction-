@@ -1,4 +1,4 @@
-﻿import { Router, Request, Response } from 'express'
+import { Router, Request, Response } from 'express'
 import bcrypt from 'bcryptjs'
 import { db } from '../db'
 import { authenticateToken, requireAdmin, generateToken, AuthenticatedRequest } from '../middleware/auth'
@@ -27,7 +27,7 @@ authRouter.post('/register', async (req: Request, res: Response): Promise<void> 
       return
     }
 
-    const existing = db.getUserByEmail(trimmedEmail)
+    const existing = await db.getUserByEmail(trimmedEmail)
     if (existing) {
       res.status(409).json({ error: 'An account with this email address already exists.' })
       return
@@ -36,7 +36,7 @@ authRouter.post('/register', async (req: Request, res: Response): Promise<void> 
     const salt = bcrypt.genSaltSync(10)
     const password_hash = bcrypt.hashSync(password, salt)
 
-    const user = db.createUser({
+    const user = await db.createUser({
       name: name.trim(),
       email: trimmedEmail,
       password_hash,
@@ -47,7 +47,7 @@ authRouter.post('/register', async (req: Request, res: Response): Promise<void> 
     const { password_hash: _, ...safeUser } = user
     const token = generateToken(safeUser)
 
-    db.recordLoginActivity({
+    await db.recordLoginActivity({
       user_id: user.id,
       email: user.email,
       status: 'success',
@@ -80,9 +80,9 @@ authRouter.post('/login', async (req: Request, res: Response): Promise<void> => 
     const ip = req.ip || req.socket.remoteAddress || 'unknown'
     const userAgent = req.headers['user-agent'] || 'unknown'
 
-    const user = db.getUserByEmail(trimmedEmail)
+    const user = await db.getUserByEmail(trimmedEmail)
     if (!user) {
-      db.recordLoginActivity({
+      await db.recordLoginActivity({
         email: trimmedEmail,
         status: 'failed',
         ip_address: ip,
@@ -94,7 +94,7 @@ authRouter.post('/login', async (req: Request, res: Response): Promise<void> => 
 
     const isMatch = bcrypt.compareSync(password, user.password_hash)
     if (!isMatch) {
-      db.recordLoginActivity({
+      await db.recordLoginActivity({
         user_id: user.id,
         email: trimmedEmail,
         status: 'failed',
@@ -111,10 +111,10 @@ authRouter.post('/login', async (req: Request, res: Response): Promise<void> => 
     }
 
     // Update last login
-    db.updateUser(user.id, { last_login_at: new Date().toISOString() })
+    await db.updateUser(user.id, { last_login_at: new Date().toISOString() })
 
     // Record login activity
-    db.recordLoginActivity({
+    await db.recordLoginActivity({
       user_id: user.id,
       email: trimmedEmail,
       status: 'success',
@@ -156,7 +156,7 @@ authRouter.post('/change-password', authenticateToken, async (req: Authenticated
       return
     }
 
-    const user = db.getUserById(req.user!.id)
+    const user = await db.getUserById(req.user!.id)
     if (!user) {
       res.status(404).json({ error: 'User not found.' })
       return
@@ -170,7 +170,7 @@ authRouter.post('/change-password', authenticateToken, async (req: Authenticated
 
     const salt = bcrypt.genSaltSync(10)
     const newHash = bcrypt.hashSync(newPassword, salt)
-    db.updateUser(user.id, { password_hash: newHash })
+    await db.updateUser(user.id, { password_hash: newHash })
 
     res.json({ message: 'Password updated successfully.' })
   } catch (err: any) {
@@ -180,8 +180,13 @@ authRouter.post('/change-password', authenticateToken, async (req: Authenticated
 })
 
 // Admin: Get Login Activity
-authRouter.get('/activity', authenticateToken, requireAdmin, (req: AuthenticatedRequest, res: Response): void => {
-  const limit = parseInt(req.query.limit as string || '100', 10)
-  const activity = db.getLoginActivity(limit)
-  res.json({ activity })
+authRouter.get('/activity', authenticateToken, requireAdmin, async (req: AuthenticatedRequest, res: Response): Promise<void> => {
+  try {
+    const limit = parseInt(req.query.limit as string || '100', 10)
+    const activity = await db.getLoginActivity(limit)
+    res.json({ activity })
+  } catch (err) {
+    console.error('Error fetching login activity:', err)
+    res.status(500).json({ error: 'Failed to retrieve login activity.' })
+  }
 })

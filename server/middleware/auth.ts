@@ -21,7 +21,7 @@ export function generateToken(user: Omit<User, 'password_hash'>): string {
   )
 }
 
-export function authenticateToken(req: AuthenticatedRequest, res: Response, next: NextFunction): void {
+export async function authenticateToken(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
   const authHeader = req.headers['authorization']
   const token = authHeader && authHeader.startsWith('Bearer ') ? authHeader.substring(7) : null
 
@@ -32,7 +32,7 @@ export function authenticateToken(req: AuthenticatedRequest, res: Response, next
 
   try {
     const payload = jwt.verify(token, JWT_SECRET) as { id: string; email: string; role: 'admin' | 'user' }
-    const user = db.getUserById(payload.id)
+    const user = await db.getUserById(payload.id)
 
     if (!user) {
       res.status(401).json({ error: 'User account no longer exists.' })
@@ -66,14 +66,14 @@ export function requireAdmin(req: AuthenticatedRequest, res: Response, next: Nex
   next()
 }
 
-// Simple IP-based rate limiter for contact submissions
+// IP-based rate limiter for contact submissions
 const submissionTracker = new Map<string, { count: number; firstAt: number }>()
 
 export function contactRateLimit(req: Request, res: Response, next: NextFunction): void {
   const ip = req.ip || req.socket.remoteAddress || 'unknown-ip'
   const now = Date.now()
-  const windowMs = 15 * 60 * 1000 // 15 minutes
-  const maxSubmissions = 10 // max 10 per 15 mins
+  const windowMs = 15 * 60 * 1000
+  const maxSubmissions = 10
 
   const record = submissionTracker.get(ip)
   if (!record) {

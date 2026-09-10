@@ -10,9 +10,12 @@
     "build": "tsc && vite build",
     "start": "tsx server/index.ts",
     "seed": "tsx server/seed.ts",
+    "db:push-to-supabase": "tsx server/scripts/push-to-supabase.ts",
+    "test": "tsx server/scripts/verify-full-stack.ts",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.45.4",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",

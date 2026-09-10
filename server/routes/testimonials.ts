@@ -1,13 +1,13 @@
-﻿import { Router, Request, Response } from 'express'
+import { Router, Request, Response } from 'express'
 import { db } from '../db'
 import { authenticateToken, requireAdmin, AuthenticatedRequest } from '../middleware/auth'
 
 export const testimonialsRouter = Router()
 
 // Public: Get testimonials
-testimonialsRouter.get('/', (_req: Request, res: Response): void => {
+testimonialsRouter.get('/', async (_req: Request, res: Response): Promise<void> => {
   try {
-    const testimonials = db.getTestimonials()
+    const testimonials = await db.getTestimonials()
     res.json({ testimonials })
   } catch (err) {
     console.error('Error fetching testimonials:', err)
@@ -16,7 +16,7 @@ testimonialsRouter.get('/', (_req: Request, res: Response): void => {
 })
 
 // Admin: Add testimonial
-testimonialsRouter.post('/', authenticateToken, requireAdmin, (req: AuthenticatedRequest, res: Response): void => {
+testimonialsRouter.post('/', authenticateToken, requireAdmin, async (req: AuthenticatedRequest, res: Response): Promise<void> => {
   try {
     const { label, type, location, quote, is_sample, rating } = req.body
     if (!quote || !label) {
@@ -24,7 +24,7 @@ testimonialsRouter.post('/', authenticateToken, requireAdmin, (req: Authenticate
       return
     }
 
-    const testimonial = db.createTestimonial({
+    const testimonial = await db.createTestimonial({
       label: label.trim(),
       type: type ? type.trim() : 'Construction Client',
       location: location ? location.trim() : 'Karachi',
@@ -41,10 +41,10 @@ testimonialsRouter.post('/', authenticateToken, requireAdmin, (req: Authenticate
 })
 
 // Admin: Update testimonial
-testimonialsRouter.put('/:id', authenticateToken, requireAdmin, (req: AuthenticatedRequest, res: Response): void => {
+testimonialsRouter.put('/:id', authenticateToken, requireAdmin, async (req: AuthenticatedRequest, res: Response): Promise<void> => {
   try {
     const { id } = req.params
-    const updated = db.updateTestimonial(id, req.body)
+    const updated = await db.updateTestimonial(id, req.body)
     if (!updated) {
       res.status(404).json({ error: 'Testimonial not found.' })
       return
@@ -57,10 +57,10 @@ testimonialsRouter.put('/:id', authenticateToken, requireAdmin, (req: Authentica
 })
 
 // Admin: Delete testimonial
-testimonialsRouter.delete('/:id', authenticateToken, requireAdmin, (req: AuthenticatedRequest, res: Response): void => {
+testimonialsRouter.delete('/:id', authenticateToken, requireAdmin, async (req: AuthenticatedRequest, res: Response): Promise<void> => {
   try {
     const { id } = req.params
-    const deleted = db.deleteTestimonial(id)
+    const deleted = await db.deleteTestimonial(id)
     if (!deleted) {
       res.status(404).json({ error: 'Testimonial not found.' })
       return

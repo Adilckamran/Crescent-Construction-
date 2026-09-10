@@ -1,13 +1,13 @@
-﻿import { Router, Response } from 'express'
+import { Router, Response } from 'express'
 import { db } from '../db'
 import { authenticateToken, requireAdmin, AuthenticatedRequest } from '../middleware/auth'
 
 export const usersRouter = Router()
 
 // Admin: Get all registered users
-usersRouter.get('/', authenticateToken, requireAdmin, (_req: AuthenticatedRequest, res: Response): void => {
+usersRouter.get('/', authenticateToken, requireAdmin, async (_req: AuthenticatedRequest, res: Response): Promise<void> => {
   try {
-    const users = db.getUsers()
+    const users = await db.getUsers()
     res.json({ users })
   } catch (err) {
     console.error('Error fetching users:', err)
@@ -16,12 +16,12 @@ usersRouter.get('/', authenticateToken, requireAdmin, (_req: AuthenticatedReques
 })
 
 // Admin: Update user status or role
-usersRouter.patch('/:id', authenticateToken, requireAdmin, (req: AuthenticatedRequest, res: Response): void => {
+usersRouter.patch('/:id', authenticateToken, requireAdmin, async (req: AuthenticatedRequest, res: Response): Promise<void> => {
   try {
     const { id } = req.params
     const { status, role } = req.body
 
-    const targetUser = db.getUserById(id)
+    const targetUser = await db.getUserById(id)
     if (!targetUser) {
       res.status(404).json({ error: 'User not found.' })
       return
@@ -47,7 +47,7 @@ usersRouter.patch('/:id', authenticateToken, requireAdmin, (req: AuthenticatedRe
       updates.role = role
     }
 
-    const updated = db.updateUser(id, updates)
+    const updated = await db.updateUser(id, updates)
     if (!updated) {
       res.status(500).json({ error: 'Failed to update user.' })
       return
@@ -62,7 +62,7 @@ usersRouter.patch('/:id', authenticateToken, requireAdmin, (req: AuthenticatedRe
 })
 
 // Admin: Delete user
-usersRouter.delete('/:id', authenticateToken, requireAdmin, (req: AuthenticatedRequest, res: Response): void => {
+usersRouter.delete('/:id', authenticateToken, requireAdmin, async (req: AuthenticatedRequest, res: Response): Promise<void> => {
   try {
     const { id } = req.params
 
@@ -71,7 +71,7 @@ usersRouter.delete('/:id', authenticateToken, requireAdmin, (req: AuthenticatedR
       return
     }
 
-    const deleted = db.deleteUser(id)
+    const deleted = await db.deleteUser(id)
     if (!deleted) {
       res.status(404).json({ error: 'User not found.' })
       return

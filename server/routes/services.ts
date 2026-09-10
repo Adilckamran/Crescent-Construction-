@@ -1,13 +1,13 @@
-﻿import { Router, Request, Response } from 'express'
+import { Router, Request, Response } from 'express'
 import { db } from '../db'
 import { authenticateToken, requireAdmin, AuthenticatedRequest } from '../middleware/auth'
 
 export const servicesRouter = Router()
 
 // Public: Get all services
-servicesRouter.get('/', (_req: Request, res: Response): void => {
+servicesRouter.get('/', async (_req: Request, res: Response): Promise<void> => {
   try {
-    const services = db.getServices()
+    const services = await db.getServices()
     res.json({ services })
   } catch (err) {
     console.error('Error fetching services:', err)
@@ -16,7 +16,7 @@ servicesRouter.get('/', (_req: Request, res: Response): void => {
 })
 
 // Admin: Add service
-servicesRouter.post('/', authenticateToken, requireAdmin, (req: AuthenticatedRequest, res: Response): void => {
+servicesRouter.post('/', authenticateToken, requireAdmin, async (req: AuthenticatedRequest, res: Response): Promise<void> => {
   try {
     const { number, title, desc, icon_name, cta, sort_order } = req.body
     if (!title || !desc) {
@@ -24,7 +24,7 @@ servicesRouter.post('/', authenticateToken, requireAdmin, (req: AuthenticatedReq
       return
     }
 
-    const service = db.createService({
+    const service = await db.createService({
       number: number || '00',
       title: title.trim(),
       desc: desc.trim(),
@@ -41,10 +41,10 @@ servicesRouter.post('/', authenticateToken, requireAdmin, (req: AuthenticatedReq
 })
 
 // Admin: Update service
-servicesRouter.put('/:id', authenticateToken, requireAdmin, (req: AuthenticatedRequest, res: Response): void => {
+servicesRouter.put('/:id', authenticateToken, requireAdmin, async (req: AuthenticatedRequest, res: Response): Promise<void> => {
   try {
     const { id } = req.params
-    const updated = db.updateService(id, req.body)
+    const updated = await db.updateService(id, req.body)
     if (!updated) {
       res.status(404).json({ error: 'Service not found.' })
       return
@@ -57,10 +57,10 @@ servicesRouter.put('/:id', authenticateToken, requireAdmin, (req: AuthenticatedR
 })
 
 // Admin: Delete service
-servicesRouter.delete('/:id', authenticateToken, requireAdmin, (req: AuthenticatedRequest, res: Response): void => {
+servicesRouter.delete('/:id', authenticateToken, requireAdmin, async (req: AuthenticatedRequest, res: Response): Promise<void> => {
   try {
     const { id } = req.params
-    const deleted = db.deleteService(id)
+    const deleted = await db.deleteService(id)
     if (!deleted) {
       res.status(404).json({ error: 'Service not found.' })
       return

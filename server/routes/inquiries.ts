@@ -36,7 +36,7 @@ inquiriesRouter.post('/', contactRateLimit, async (req: Request, res: Response):
     }
 
     // Persist in database
-    const inquiry = db.createInquiry({
+    const inquiry = await db.createInquiry({
       name: name.trim(),
       phone: trimmedPhone,
       email: trimmedEmail,
@@ -72,12 +72,12 @@ inquiriesRouter.post('/', contactRateLimit, async (req: Request, res: Response):
 })
 
 // Admin: Get all inquiries
-inquiriesRouter.get('/admin/list', authenticateToken, requireAdmin, (req: AuthenticatedRequest, res: Response): void => {
+inquiriesRouter.get('/admin/list', authenticateToken, requireAdmin, async (req: AuthenticatedRequest, res: Response): Promise<void> => {
   try {
     const unreadOnly = req.query.unread === 'true'
     const search = req.query.search as string | undefined
 
-    const inquiries = db.getInquiries({ unreadOnly, search })
+    const inquiries = await db.getInquiries({ unreadOnly, search })
     res.json({ inquiries })
   } catch (err) {
     console.error('Error getting inquiries:', err)
@@ -86,18 +86,18 @@ inquiriesRouter.get('/admin/list', authenticateToken, requireAdmin, (req: Authen
 })
 
 // Admin: Toggle read/unread status
-inquiriesRouter.patch('/admin/:id/read', authenticateToken, requireAdmin, (req: AuthenticatedRequest, res: Response): void => {
+inquiriesRouter.patch('/admin/:id/read', authenticateToken, requireAdmin, async (req: AuthenticatedRequest, res: Response): Promise<void> => {
   try {
     const { id } = req.params
     const { is_read } = req.body
 
-    const existing = db.getInquiryById(id)
+    const existing = await db.getInquiryById(id)
     if (!existing) {
       res.status(404).json({ error: 'Inquiry not found.' })
       return
     }
 
-    const updated = db.updateInquiry(id, { is_read: is_read !== undefined ? Boolean(is_read) : !existing.is_read })
+    const updated = await db.updateInquiry(id, { is_read: is_read !== undefined ? Boolean(is_read) : !existing.is_read })
     res.json({ message: 'Inquiry status updated.', inquiry: updated })
   } catch (err) {
     console.error('Error updating inquiry read status:', err)
@@ -106,10 +106,10 @@ inquiriesRouter.patch('/admin/:id/read', authenticateToken, requireAdmin, (req: 
 })
 
 // Admin: Delete inquiry
-inquiriesRouter.delete('/admin/:id', authenticateToken, requireAdmin, (req: AuthenticatedRequest, res: Response): void => {
+inquiriesRouter.delete('/admin/:id', authenticateToken, requireAdmin, async (req: AuthenticatedRequest, res: Response): Promise<void> => {
   try {
     const { id } = req.params
-    const deleted = db.deleteInquiry(id)
+    const deleted = await db.deleteInquiry(id)
     if (!deleted) {
       res.status(404).json({ error: 'Inquiry not found.' })
       return

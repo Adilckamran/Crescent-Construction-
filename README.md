@@ -1,297 +1,188 @@
-# Crescent Construction
+# Crescent Construction — Production-Ready Full-Stack Website
 
-A modern full-stack website for **Crescent Construction**, a construction and waterproofing company based in Karachi, Pakistan.
-
-The website provides information about our construction services, projects, waterproofing solutions, and customer inquiries, along with a secure administration panel for managing website content.
----
-## Technology Stack
-### Frontend
-- React
-- TypeScript
-- Tailwind CSS
-- Vite
-- React Router
-- Lucide React
-
-### Backend
-- Node.js
-- Express.js
-- TypeScript
-
-### Authentication & Security
-- JWT-based authentication
-- Role-based access control
-- bcryptjs password hashing
-- Protected administrator routes
-
-### Database & Storage
-- Persistent local data storage
-- Project and service management
-- Customer inquiry storage
-- Local image uploads
-
-### Email
-- Nodemailer
-- Gmail SMTP
-- Customer inquiry email notifications
+Production-ready web application for **Crescent Construction** (Karachi, Pakistan). Built with a modern full-stack architecture:
+- **Frontend**: React 18, TypeScript, Tailwind CSS, Vite, React Router, Lucide Icons.
+- **Backend API**: Node.js, Express, TypeScript (`server/`).
+- **Database Architecture**: 
+  - **Production Mode**: Supabase PostgreSQL cloud database with automated Row Level Security (RLS) policies and indexes.
+  - **Local Development Fallback**: Zero-dependency ACID-compliant atomic persistent store (`data/crescent_db.json`), automatically keeping the website 100% functional even offline or before cloud credentials are added.
+- **Storage Architecture**: 
+  - **Production Mode**: Supabase Storage bucket (`projects`) for permanent, cloud-persisted CDN-backed project photography that survives server restarts, redeployments, and hosting changes.
+  - **Local Development Fallback**: Local `/uploads` directory (`public/uploads/`).
+- **Authentication**: JWT-based role-based access control (RBAC) with password encryption (`bcryptjs`), separating public users from administrators.
+- **Direct Image Uploads**: Multi-image file uploader storing directly into Supabase Storage or local fallback.
+- **Inquiry Delivery**: Real email dispatch using `Nodemailer` with fallback to persistent database storage.
 
 ---
 
 ## Business Information
 
-**Company:** Crescent Construction
-
-**Phone / WhatsApp:** 03272834501
-
-**Email:** crescentconstructionofficial@gmail.com
-
-**Office:** Gulshan-e-Iqbal Block 13 D3, Panama Centre, Office No. M-07, Karachi, Pakistan
-
-**Facebook:**  
-https://web.facebook.com/crescent.construction/
-
-**Instagram:**  
-https://www.instagram.com/crescentconstruction11/
+- **Company Name**: Crescent Construction
+- **Phone / WhatsApp**: 03272834501
+- **Official Email**: crescentconstructionofficial@gmail.com
+- **Office**: Gulshan-e-Iqbal Block 13 D3, Panama Centre, Office No. M-07, Karachi, Pakistan
+- **Facebook**: https://web.facebook.com/crescent.construction/
+- **Instagram**: https://www.instagram.com/crescentconstruction11?stkn=b2RqM3d3MmtsYzZw
 
 ---
 
-## Main Services
+## Quick Start (Local Development)
 
-- Rooftop Waterproofing
-- Basement Waterproofing
-- Terrace Waterproofing
-- Water Tank Waterproofing
-- Foundation Waterproofing
-- Concrete Waterproofing
-- Structural Waterproofing
-- Under-Construction Waterproofing
-- Grey Structure Construction
-- Complete Construction & Finishing
+1. **Clone or open project folder**:
+   ```bash
+   cd crescent-construction-website
+   ```
 
----
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
 
-## Website Features
+3. **Configure Environment Variables**:
+   Copy `.env.example` to `.env` (already done by default):
+   ```bash
+   cp .env.example .env
+   ```
 
-### Public Website
-
-- Company information
-- Construction services
-- Waterproofing services
-- Project portfolio
-- Project details
-- Contact and inquiry forms
-- WhatsApp contact options
-- Email inquiry submission
-- Responsive design for desktop and mobile
-
-### Admin Panel
-
-The website includes a protected administrator panel for managing website content and customer inquiries.
-
-Features include:
-
-- Dashboard
-- Project management
-- Add, edit and delete projects
-- Multiple project image uploads
-- Featured project management
-- Customer inquiry management
-- Read/unread inquiry status
-- Customer contact information
-- WhatsApp reply option
-- Email reply option
-- Services management
-- Testimonials management
-- User account management
-- Administrator role management
-- Login activity and security logs
-- Admin password management
+4. **Start Development Servers** (Runs Express API on port 5000 & Vite Client on port 5173 with auto-proxy):
+   ```bash
+   npm run dev
+   ```
+   Open `http://localhost:5173` in your browser.
 
 ---
 
-## Project Structure
+## Initial Administrator Account
 
-```text
-crescent-construction-website/
-│
-├── public/
-│   └── uploads/
-│
-├── src/
-│   ├── components/
-│   ├── pages/
-│   ├── assets/
-│   └── ...
-│
-├── server/
-│   ├── routes/
-│   ├── middleware/
-│   └── ...
-│
-├── data/
-│
-├── .env.example
-├── .gitignore
-├── index.html
-├── package.json
-├── package-lock.json
-├── vite.config.ts
-├── tailwind.config.js
-├── tsconfig.json
-└── README.md
-Local Development
-1. Install Dependencies
-npm install
-2. Configure Environment Variables
+On first launch, the database automatically seeds the primary administrator account:
 
-Create a local .env file using .env.example as a reference.
+- **Email**: `crescentconstructionofficial@gmail.com`
+- **Default Password**: `CrescentAdmin2026!` (configured in `.env`)
+- **Admin Panel URL**: `/admin` or via the "Admin Panel" button after logging in at `/login`.
 
-cp .env.example .env
+---
 
-Then configure the required environment variables in your local .env file.
+## Supabase Production Cloud Setup (PostgreSQL + Supabase Storage)
 
-3. Start the Development Server
-npm run dev
+The backend features a **Dual-Engine Architecture**:
+- When `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` are provided in `.env`, the system automatically routes all database queries to Supabase PostgreSQL and stores all project photos in Supabase Storage with permanent public CDN URLs.
+- If Supabase environment variables are omitted or blank, the system automatically falls back to the local ACID JSON store (`data/crescent_db.json`) and local disk uploads (`public/uploads/`), ensuring zero downtime or crash during development or setup.
 
-The application runs the frontend and backend development servers with the configured development setup.
+### Step 1: Create a Free Supabase Project
+1. Go to [https://supabase.com](https://supabase.com) and create a project (e.g. `crescent-construction`).
+2. Set a secure database password and choose your nearest region (e.g., Singapore or Frankfurt).
 
-Environment Variables
+### Step 2: Run the Database Schema Migration
+1. In your Supabase Dashboard, click on **SQL Editor** in the left sidebar.
+2. Open the file [`supabase/schema.sql`](supabase/schema.sql) in this repository.
+3. Copy its entire content, paste it into the Supabase SQL Editor, and click **Run**.
+4. This will instantly create:
+   - `users` table
+   - `projects` table
+   - `inquiries` table
+   - `services` table
+   - `testimonials` table
+   - `login_activity` table
+   - Performance indexes on slugs, categories, created timestamps, and email lookups
+   - Row Level Security (RLS) policies allowing public read of published projects/services and admin-only mutations
+   - Public Supabase Storage bucket named `projects` with public image read access policies
 
-The application uses environment variables for sensitive configuration.
+### Step 3: Verify the Storage Bucket
+1. In your Supabase Dashboard, click on **Storage** in the left sidebar.
+2. Confirm the `projects` bucket is listed and marked as **Public**.
+   *(If not present, simply click "New bucket", name it `projects`, toggle **Public bucket** ON, and click Save).*
 
-Example:
+### Step 4: Add Supabase Credentials to `.env`
+1. In your Supabase Dashboard, go to **Project Settings** (gear icon) -> **API**.
+2. Copy:
+   - **Project URL**
+   - **service_role key** (under Project API keys; click reveal)
+3. Paste them into your `.env` file:
+   ```env
+   SUPABASE_URL=https://your-project-id.supabase.co
+   SUPABASE_SERVICE_ROLE_KEY=eyJh...your-service-role-key...
+   SUPABASE_STORAGE_BUCKET=projects
+   ```
+   *(Note: The service_role key is kept strictly on the Node.js backend server and is never sent or exposed to client browsers).*
 
-PORT=5000
-NODE_ENV=development
+### Step 5: Push Existing Local Data & Photos to Supabase
+Run the built-in 1-click migration script:
+```bash
+npm run db:push-to-supabase
+```
+This script will:
+- Connect securely to your Supabase project.
+- Upload all photos from `public/uploads/` to the Supabase Storage bucket `projects`.
+- Upsert all initial projects, users, inquiries, services, and testimonials from `data/crescent_db.json` into Supabase PostgreSQL.
+- Replace all local `/uploads/...` paths with permanent Supabase Storage CDN URLs.
 
-JWT_SECRET=your-secure-jwt-secret
+### Step 6: Verify Admin Project Flow in Production
+1. Start the server (`npm run dev` or `npm start`).
+2. Log into the Admin Panel at `/login` with your admin credentials.
+3. Go to **Projects** (`/admin/projects`) -> Click **Add New Project**.
+4. Upload images and fill in details.
+5. Click **Save Project**.
+6. The project will now be permanently saved in Supabase PostgreSQL and images stored in Supabase Storage. Even if you redeploy, restart the server, or rebuild containers, all your project photos and data will remain intact!
 
-ADMIN_EMAIL=your-admin-email
-ADMIN_DEFAULT_PASSWORD=your-secure-admin-password
+---
 
-SMTP_HOST=smtp.gmail.com
-SMTP_PORT=587
-SMTP_USER=your-email
-SMTP_PASS=your-gmail-app-password
+## Production Deployment
 
-CONTACT_RECEIVER_EMAIL=your-email
-Security
+### Option 1: VPS / Dedicated Server / Node.js Host (Render, Railway, DigitalOcean, Ubuntu VPS)
 
-The actual values must never be published in this repository.
+1. Set environment variables on your host:
+   ```env
+   PORT=5000
+   NODE_ENV=production
+   JWT_SECRET=your-secure-random-jwt-secret-string
+   ADMIN_EMAIL=crescentconstructionofficial@gmail.com
+   ADMIN_DEFAULT_PASSWORD=YourStrongAdminPassword123!
+   SMTP_HOST=smtp.gmail.com
+   SMTP_PORT=587
+   SMTP_USER=crescentconstructionofficial@gmail.com
+   SMTP_PASS=your-gmail-app-password
+   CONTACT_RECEIVER_EMAIL=crescentconstructionofficial@gmail.com
+   ```
 
-Keep sensitive credentials inside:
+2. Build and start:
+   ```bash
+   npm install
+   npm run build
+   npm start
+   ```
+   The production Express server automatically serves both the API routes (`/api/*`), image uploads (`/uploads/*`), and the compiled Vite frontend (`dist/`) on port 5000 with SPA catch-all routing!
 
-.env
+### Option 2: PM2 Process Manager (for VPS)
 
-or configure them through the environment-variable settings provided by your hosting platform.
-
-Administrator Access
-
-The website contains a protected administrator panel.
-
-Admin panel:
-
-/admin
-
-Administrator credentials are intentionally not included in this repository.
-
-The administrator email and password are configured through environment variables.
-
-Email Configuration
-
-Customer inquiries can be delivered through Gmail SMTP using Nodemailer.
-
-To configure email delivery:
-
-Enable 2-Step Verification on the Gmail account.
-Create a Gmail App Password.
-Configure the SMTP environment variables.
-Add the App Password to the local .env file.
-Restart the application.
-
-Example:
-
-SMTP_HOST=smtp.gmail.com
-SMTP_PORT=587
-SMTP_USER=your-email@gmail.com
-SMTP_PASS=your-app-password
-CONTACT_RECEIVER_EMAIL=your-email@gmail.com
-
-Never publish the actual Gmail App Password.
-
-Production Deployment
-
-Before deploying to production, configure the required environment variables on the hosting server.
-
-Example:
-
-NODE_ENV=production
-PORT=5000
-JWT_SECRET=your-production-secret
-
-ADMIN_EMAIL=your-admin-email
-ADMIN_DEFAULT_PASSWORD=your-production-admin-password
-
-SMTP_HOST=smtp.gmail.com
-SMTP_PORT=587
-SMTP_USER=your-email
-SMTP_PASS=your-gmail-app-password
-
-CONTACT_RECEIVER_EMAIL=your-email
-
-Install dependencies:
-
-npm install
-
-Build the application:
-
+```bash
 npm run build
+pm2 start "npm start" --name "crescent-website"
+pm2 save
+```
 
-Start the production server:
+---
 
-npm start
-Security Guidelines
+## Admin Panel Features
 
-The following information must never be committed to GitHub:
+- **Dashboard (`/admin`)**: Key statistics (Total Projects, Inquiries, Unread inquiries, Registered Users, Login Activity), recent leads, and quick actions.
+- **Projects (`/admin/projects`)**: Add, edit, delete projects; direct drag-and-drop / multiple image upload; toggle featured status; manage descriptions and completion years.
+- **Inquiries (`/admin/inquiries`)**: View all customer quote requests; filter by Read/Unread; view full customer message, budget, and location; direct one-click "Reply on WhatsApp" and "Reply via Email" buttons; toggle status and delete records.
+- **Services (`/admin/services`)**: Edit service titles, descriptions, icons, and CTA text.
+- **Testimonials (`/admin/testimonials`)**: Manage client feedback, ratings, and sample reviews.
+- **User Accounts (`/admin/users`)**: View registered accounts, toggle active/inactive status, grant/revoke administrator privileges.
+- **Login Activity (`/admin/activity`)**: Security audit trail of user and admin logins with timestamps, success/failure status, and IP addresses.
+- **Settings (`/admin/settings`)**: Secure admin password reset form.
 
-Administrator passwords
-Gmail App Passwords
-JWT secrets
-API keys
-Private authentication credentials
-Production secrets
-Other sensitive environment variables
+---
 
-The .env file should remain local and should be excluded through .gitignore.
+## Email Configuration (Gmail SMTP)
 
-The repository may contain:
-
-.env.example
-
-but it must contain placeholder values only, never real credentials.
-
-Client Feedback
-
-We believe our work speaks for itself.
-
-Clients can request visits to selected completed or ongoing project sites to see our workmanship firsthand.
-
-Client references and feedback may also be shared upon request, subject to client permission.
-
-Contact
-
-For construction, waterproofing, or project inquiries:
-
-Crescent Construction
-
-Phone / WhatsApp: 03272834501
-
-Email: crescentconstructionofficial@gmail.com
-
-Office: Gulshan-e-Iqbal Block 13 D3, Panama Centre, Office No. M-07, Karachi, Pakistan
-
-License
-
-This project is developed for Crescent Construction.
-
-All rights reserved.
+To enable live email delivery to `crescentconstructionofficial@gmail.com`:
+1. Log in to the Google Account `crescentconstructionofficial@gmail.com`.
+2. Enable 2-Step Verification in Google Account Security.
+3. Generate an **App Password**: [https://myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords). Select "Mail" and generate a 16-character code.
+4. Paste the 16-character code into `.env`:
+   ```env
+   SMTP_PASS=xxxx xxxx xxxx xxxx
+   ```
+5. Restart the server. Now, whenever any visitor submits the contact form, an email will arrive in your Gmail inbox!

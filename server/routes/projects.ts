@@ -14,13 +14,13 @@ function generateSlug(title: string): string {
 }
 
 // Public: Get all projects
-projectsRouter.get('/', (req: Request, res: Response): void => {
+projectsRouter.get('/', async (req: Request, res: Response): Promise<void> => {
   try {
     const category = req.query.category as string | undefined
     const featured = req.query.featured !== undefined ? req.query.featured === 'true' : undefined
     const search = req.query.search as string | undefined
 
-    const projects = db.getProjects({ category, featured, search })
+    const projects = await db.getProjects({ category, featured, search })
     res.json({ projects })
   } catch (err) {
     console.error('Error fetching projects:', err)
@@ -29,9 +29,9 @@ projectsRouter.get('/', (req: Request, res: Response): void => {
 })
 
 // Public: Get single project by ID or Slug
-projectsRouter.get('/:idOrSlug', (req: Request, res: Response): void => {
+projectsRouter.get('/:idOrSlug', async (req: Request, res: Response): Promise<void> => {
   try {
-    const project = db.getProjectByIdOrSlug(req.params.idOrSlug)
+    const project = await db.getProjectByIdOrSlug(req.params.idOrSlug)
     if (!project) {
       res.status(404).json({ error: 'Project not found.' })
       return
@@ -44,7 +44,7 @@ projectsRouter.get('/:idOrSlug', (req: Request, res: Response): void => {
 })
 
 // Admin: Create new project
-projectsRouter.post('/', authenticateToken, requireAdmin, (req: AuthenticatedRequest, res: Response): void => {
+projectsRouter.post('/', authenticateToken, requireAdmin, async (req: AuthenticatedRequest, res: Response): Promise<void> => {
   try {
     const {
       title,
@@ -66,7 +66,7 @@ projectsRouter.post('/', authenticateToken, requireAdmin, (req: AuthenticatedReq
     const slug = generateSlug(title)
     const validImages = Array.isArray(images) && images.length > 0 ? images : ['/uploads/project-2.jpg']
 
-    const project = db.createProject({
+    const project = await db.createProject({
       title: title.trim(),
       slug,
       category,
@@ -87,10 +87,10 @@ projectsRouter.post('/', authenticateToken, requireAdmin, (req: AuthenticatedReq
 })
 
 // Admin: Update project
-projectsRouter.put('/:id', authenticateToken, requireAdmin, (req: AuthenticatedRequest, res: Response): void => {
+projectsRouter.put('/:id', authenticateToken, requireAdmin, async (req: AuthenticatedRequest, res: Response): Promise<void> => {
   try {
     const { id } = req.params
-    const project = db.getProjectByIdOrSlug(id)
+    const project = await db.getProjectByIdOrSlug(id)
     if (!project) {
       res.status(404).json({ error: 'Project not found.' })
       return
@@ -108,7 +108,7 @@ projectsRouter.put('/:id', authenticateToken, requireAdmin, (req: AuthenticatedR
       completion_year,
     } = req.body
 
-    const updated = db.updateProject(project.id, {
+    const updated = await db.updateProject(project.id, {
       ...(title && { title: title.trim() }),
       ...(category && { category }),
       ...(location && { location: location.trim() }),
@@ -128,16 +128,16 @@ projectsRouter.put('/:id', authenticateToken, requireAdmin, (req: AuthenticatedR
 })
 
 // Admin: Delete project
-projectsRouter.delete('/:id', authenticateToken, requireAdmin, (req: AuthenticatedRequest, res: Response): void => {
+projectsRouter.delete('/:id', authenticateToken, requireAdmin, async (req: AuthenticatedRequest, res: Response): Promise<void> => {
   try {
     const { id } = req.params
-    const project = db.getProjectByIdOrSlug(id)
+    const project = await db.getProjectByIdOrSlug(id)
     if (!project) {
       res.status(404).json({ error: 'Project not found.' })
       return
     }
 
-    const deleted = db.deleteProject(project.id)
+    const deleted = await db.deleteProject(project.id)
     if (!deleted) {
       res.status(500).json({ error: 'Could not delete project.' })
       return
