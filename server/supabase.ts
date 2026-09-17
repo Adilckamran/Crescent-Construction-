@@ -1,41 +1,62 @@
-﻿import { createClient, SupabaseClient } from '@supabase/supabase-js'
+import dotenv from 'dotenv'
+import path from 'path'
+import fs from 'fs'
 
-const supabaseUrl = process.env.SUPABASE_URL || ''
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || ''
-export const STORAGE_BUCKET = process.env.SUPABASE_STORAGE_BUCKET || 'projects'
+const envPath = path.resolve(process.cwd(), '.env')
+if (fs.existsSync(envPath)) {
+  dotenv.config({ path: envPath })
+} else {
+  dotenv.config()
+}
+
+import { createClient, SupabaseClient } from '@supabase/supabase-js'
+
+const getSupabaseUrl = () => (process.env.SUPABASE_URL || '').trim()
+const getSupabaseKey = () => (process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || '').trim()
+export const STORAGE_BUCKET = (process.env.SUPABASE_STORAGE_BUCKET || 'projects').trim()
 
 export function isSupabaseConfigured(): boolean {
+  const url = getSupabaseUrl()
+  const key = getSupabaseKey()
   return Boolean(
-    supabaseUrl &&
-    supabaseUrl.startsWith('http') &&
-    supabaseKey &&
-    supabaseKey.length > 20
+    url &&
+    url.startsWith('http') &&
+    key &&
+    key.length > 20
   )
 }
 
 let client: SupabaseClient | null = null
 
-if (isSupabaseConfigured()) {
-  try {
-    client = createClient(supabaseUrl, supabaseKey, {
-      auth: {
-        autoRefreshToken: false,
-        persistSession: false,
-      },
-    })
-    console.log('[SUPABASE] Connected to Supabase backend at:', supabaseUrl)
-  } catch (err) {
-    console.error('[SUPABASE] Failed to initialize client:', err)
-    client = null
+export function getClient(): SupabaseClient | null {
+  if (client) return client
+  if (isSupabaseConfigured()) {
+    try {
+      const url = getSupabaseUrl()
+      const key = getSupabaseKey()
+      client = createClient(url, key, {
+        auth: {
+          autoRefreshToken: false,
+          persistSession: false,
+        },
+      })
+      console.log('[SUPABASE] Connected to Supabase backend at:', url)
+    } catch (err) {
+      console.error('[SUPABASE] Failed to initialize client:', err)
+      client = null
+    }
   }
-} else {
-  console.log('[STORAGE] Supabase credentials not detected in .env. Operating in local persistent mode.')
+  return client
 }
 
-export const supabase = client
+// Initialize on module load if already configured
+getClient()
+
+export const supabase = client || getClient()
 
 export function getPublicStorageUrl(filePath: string): string {
-  if (!supabaseUrl) return filePath
+  const url = getSupabaseUrl()
+  if (!url) return filePath
   const cleanPath = filePath.replace(/^\/+/, '').replace(/^projects\/+/, '')
-  return `${supabaseUrl}/storage/v1/object/public/${STORAGE_BUCKET}/${cleanPath}`
+  return `${url}/storage/v1/object/public/${STORAGE_BUCKET}/${cleanPath}`
 }

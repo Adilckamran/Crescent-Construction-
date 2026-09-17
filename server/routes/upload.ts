@@ -1,4 +1,4 @@
-﻿import { Router, Response } from 'express'
+import { Router, Response } from 'express'
 import multer from 'multer'
 import path from 'path'
 import fs from 'fs'
@@ -8,8 +8,12 @@ import { supabase, isSupabaseConfigured, STORAGE_BUCKET } from '../supabase'
 export const uploadRouter = Router()
 
 const UPLOADS_DIR = path.resolve(process.cwd(), 'public', 'uploads')
-if (!fs.existsSync(UPLOADS_DIR)) {
-  fs.mkdirSync(UPLOADS_DIR, { recursive: true })
+try {
+  if (!fs.existsSync(UPLOADS_DIR)) {
+    fs.mkdirSync(UPLOADS_DIR, { recursive: true })
+  }
+} catch {
+  // Read-only filesystem in serverless environment
 }
 
 // Use memory storage so buffers can be dispatched to Supabase or local disk
@@ -78,6 +82,9 @@ uploadRouter.post(
           urls.push(publicUrlData.publicUrl)
         } else {
           // 2. Local Fallback Disk Storage
+          if (process.env.NETLIFY || process.env.AWS_LAMBDA_FUNCTION_NAME) {
+            throw new Error('Supabase Storage is not configured. Serverless environments require Supabase Storage for persistent image uploads.')
+          }
           const localPath = path.join(UPLOADS_DIR, filename)
           fs.writeFileSync(localPath, file.buffer)
           urls.push(`/uploads/${filename}`)

@@ -8,7 +8,7 @@
       "role": "admin",
       "status": "active",
       "created_at": "2026-09-08T10:12:24.769Z",
-      "last_login_at": "2026-09-10T10:24:48.394Z"
+      "last_login_at": "2026-09-17T09:24:46.223Z"
     },
     {
       "name": "Regular Test User",
@@ -334,6 +334,90 @@
   ],
   "inquiries": [
     {
+      "name": "Netlify Serverless Test Visitor",
+      "phone": "03272834501",
+      "email": "crescentconstructionofficial@gmail.com",
+      "project_type": "Commercial Construction",
+      "location": "Karachi, Pakistan",
+      "budget": "PKR 1 Crore",
+      "message": "Testing contact inquiry pipeline inside Netlify serverless function.",
+      "id": "inq-1789637089063-fq2x",
+      "is_read": false,
+      "created_at": "2026-09-17T09:24:49.063Z"
+    },
+    {
+      "name": "Automated Test Visitor",
+      "phone": "03001234567",
+      "email": "test.visitor@example.com",
+      "project_type": "Residential Construction",
+      "location": "Karachi, DHA",
+      "budget": "",
+      "message": "This is an automated test inquiry verifying the contact form pipeline.",
+      "id": "inq-1789636948419-kjxq",
+      "is_read": false,
+      "created_at": "2026-09-17T09:22:28.419Z"
+    },
+    {
+      "name": "Netlify Serverless Test Visitor",
+      "phone": "03272834501",
+      "email": "crescentconstructionofficial@gmail.com",
+      "project_type": "Commercial Construction",
+      "location": "Karachi, Pakistan",
+      "budget": "PKR 1 Crore",
+      "message": "Testing contact inquiry pipeline inside Netlify serverless function.",
+      "id": "inq-1789636448686-ijr7",
+      "is_read": false,
+      "created_at": "2026-09-17T09:14:08.686Z"
+    },
+    {
+      "name": "Netlify Serverless Test Visitor",
+      "phone": "03272834501",
+      "email": "crescentconstructionofficial@gmail.com",
+      "project_type": "Commercial Construction",
+      "location": "Karachi, Pakistan",
+      "budget": "PKR 1 Crore",
+      "message": "Testing contact inquiry pipeline inside Netlify serverless function.",
+      "id": "inq-1789636335968-vil0",
+      "is_read": false,
+      "created_at": "2026-09-17T09:12:15.968Z"
+    },
+    {
+      "name": "Automated Test Visitor",
+      "phone": "03001234567",
+      "email": "test.visitor@example.com",
+      "project_type": "Residential Construction",
+      "location": "Karachi, DHA",
+      "budget": "",
+      "message": "This is an automated test inquiry verifying the contact form pipeline.",
+      "id": "inq-1789544368104-j8l6",
+      "is_read": false,
+      "created_at": "2026-09-16T07:39:28.104Z"
+    },
+    {
+      "name": "Automated Test Visitor",
+      "phone": "03001234567",
+      "email": "test.visitor@example.com",
+      "project_type": "Residential Construction",
+      "location": "Karachi, DHA",
+      "budget": "",
+      "message": "This is an automated test inquiry verifying the contact form pipeline.",
+      "id": "inq-1789040826600-07jv",
+      "is_read": false,
+      "created_at": "2026-09-10T11:47:06.600Z"
+    },
+    {
+      "name": "Automated Test Visitor",
+      "phone": "03001234567",
+      "email": "test.visitor@example.com",
+      "project_type": "Residential Construction",
+      "location": "Karachi, DHA",
+      "budget": "",
+      "message": "This is an automated test inquiry verifying the contact form pipeline.",
+      "id": "inq-1789040751951-7kzq",
+      "is_read": false,
+      "created_at": "2026-09-10T11:45:51.951Z"
+    },
+    {
       "name": "Automated Test Visitor",
       "phone": "03001234567",
       "email": "test.visitor@example.com",
@@ -550,6 +634,69 @@
     }
   ],
   "login_activity": [
+    {
+      "user_id": "user-admin-1",
+      "email": "crescentconstructionofficial@gmail.com",
+      "status": "success",
+      "ip_address": "unknown",
+      "user_agent": "unknown",
+      "id": "act-1789637086842-c0nq",
+      "created_at": "2026-09-17T09:24:46.842Z"
+    },
+    {
+      "user_id": "user-admin-1",
+      "email": "crescentconstructionofficial@gmail.com",
+      "status": "success",
+      "ip_address": "::1",
+      "user_agent": "node",
+      "id": "act-1789636946624-x85q",
+      "created_at": "2026-09-17T09:22:26.624Z"
+    },
+    {
+      "user_id": "user-admin-1",
+      "email": "crescentconstructionofficial@gmail.com",
+      "status": "success",
+      "ip_address": "unknown",
+      "user_agent": "unknown",
+      "id": "act-1789636441790-oiy8",
+      "created_at": "2026-09-17T09:14:01.790Z"
+    },
+    {
+      "user_id": "user-admin-1",
+      "email": "crescentconstructionofficial@gmail.com",
+      "status": "success",
+      "ip_address": "unknown",
+      "user_agent": "unknown",
+      "id": "act-1789636332718-piig",
+      "created_at": "2026-09-17T09:12:12.718Z"
+    },
+    {
+      "user_id": "user-admin-1",
+      "email": "crescentconstructionofficial@gmail.com",
+      "status": "success",
+      "ip_address": "::1",
+      "user_agent": "node",
+      "id": "act-1789544362804-ieyx",
+      "created_at": "2026-09-16T07:39:22.804Z"
+    },
+    {
+      "user_id": "user-admin-1",
+      "email": "crescentconstructionofficial@gmail.com",
+      "status": "success",
+      "ip_address": "::1",
+      "user_agent": "node",
+      "id": "act-1789040820581-wlqt",
+      "created_at": "2026-09-10T11:47:00.581Z"
+    },
+    {
+      "user_id": "user-admin-1",
+      "email": "crescentconstructionofficial@gmail.com",
+      "status": "success",
+      "ip_address": "::1",
+      "user_agent": "node",
+      "id": "act-1789040751892-uec8",
+      "created_at": "2026-09-10T11:45:51.892Z"
+    },
     {
       "user_id": "user-admin-1",
       "email": "crescentconstructionofficial@gmail.com",

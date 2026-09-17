@@ -1,4 +1,4 @@
-﻿import fs from 'fs'
+import fs from 'fs'
 import path from 'path'
 import bcrypt from 'bcryptjs'
 import { supabase, isSupabaseConfigured } from './supabase'
@@ -90,8 +90,12 @@ class DatabaseManager {
   private data: DatabaseSchema
 
   constructor() {
-    if (!fs.existsSync(DB_DIR)) {
-      fs.mkdirSync(DB_DIR, { recursive: true })
+    try {
+      if (!fs.existsSync(DB_DIR)) {
+        fs.mkdirSync(DB_DIR, { recursive: true })
+      }
+    } catch {
+      // Read-only filesystem in serverless container
     }
 
     if (fs.existsSync(DB_FILE)) {
@@ -128,7 +132,11 @@ class DatabaseManager {
       fs.writeFileSync(tempPath, JSON.stringify(this.data, null, 2), 'utf-8')
       fs.renameSync(tempPath, DB_FILE)
     } catch (err) {
-      fs.writeFileSync(DB_FILE, JSON.stringify(this.data, null, 2), 'utf-8')
+      try {
+        fs.writeFileSync(DB_FILE, JSON.stringify(this.data, null, 2), 'utf-8')
+      } catch {
+        // Read-only filesystem in serverless container
+      }
     }
   }
 

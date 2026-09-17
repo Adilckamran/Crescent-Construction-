@@ -1,4 +1,4 @@
-﻿import { Router, Request, Response } from 'express'
+import { Router, Request, Response } from 'express'
 import { db } from '../db'
 import { authenticateToken, requireAdmin, AuthenticatedRequest, contactRateLimit } from '../middleware/auth'
 import { sendInquiryNotification } from '../services/email'
@@ -46,19 +46,21 @@ inquiriesRouter.post('/', contactRateLimit, async (req: Request, res: Response):
       message: message ? message.trim() : 'No additional message provided.',
     })
 
-    // Dispatch email notification non-blockingly
-    sendInquiryNotification({
-      name: inquiry.name,
-      phone: inquiry.phone,
-      email: inquiry.email,
-      project_type: inquiry.project_type,
-      location: inquiry.location,
-      budget: inquiry.budget,
-      message: inquiry.message,
-      createdAt: inquiry.created_at,
-    }).catch(err => {
-      console.error('[EMAIL NOTIFICATION EXCEPTION]:', err)
-    })
+    // Dispatch email notification (awaited so serverless execution context does not freeze prematurely)
+    try {
+      await sendInquiryNotification({
+        name: inquiry.name,
+        phone: inquiry.phone,
+        email: inquiry.email,
+        project_type: inquiry.project_type,
+        location: inquiry.location,
+        budget: inquiry.budget,
+        message: inquiry.message,
+        createdAt: inquiry.created_at,
+      })
+    } catch (emailErr) {
+      console.error('[EMAIL NOTIFICATION EXCEPTION]:', emailErr)
+    }
 
     res.status(201).json({
       success: true,
